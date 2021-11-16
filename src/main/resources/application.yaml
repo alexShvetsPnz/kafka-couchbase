@@ -2,16 +2,17 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     listener:
+      concurrency: 10
       ack-mode: manual_immediate
     producer:
-      topic: topic-1p
+      topic: topic-10p
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       retries: 3
       acks: 1
     consumer:
       groupId: test-group-2
-      topic: topic-1p
+      topic: topic-10p
       enable-auto-commit: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
@@ -20,3 +21,7 @@ spring:
           json:
             trusted:
               packages: 'com.shvets.kafkaandcouchbase.kafka.model'
+
+bootstrap:
+  count: 10000
+  sender-type: async

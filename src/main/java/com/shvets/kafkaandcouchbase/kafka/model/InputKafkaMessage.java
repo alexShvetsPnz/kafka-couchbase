@@ -13,9 +13,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class InputKafkaMessage {
+public class InputKafkaMessage implements HasIdentifier{
 
     private String value;      // payload
     private Date startTime;    // when the producer started
+
+    public String getIdentifier() {
+        return value;
+    }
 }
 
