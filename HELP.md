@@ -14,3 +14,11 @@ docker exec -it kafka bash
 TO create topic with 10 partitions
 
 kafka-topics --create --bootstrap-server kafka:9092 --replication-factor 1 --partitions 10 --topic topic-10p 
+
+to run Couchbase
+docker run -d --name db1 couchbase
+docker run -d --name db2 couchbase
+docker run -d --name db3 -p 8091-8096:8091-8096 -p 11210-11211:11210-11211 couchbase
+
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' db1
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' db2

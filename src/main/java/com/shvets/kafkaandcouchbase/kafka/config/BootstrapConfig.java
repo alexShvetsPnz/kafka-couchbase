@@ -25,7 +25,8 @@ public class BootstrapConfig {
         BootstrapSender sender = bootstrapSenders.stream()
                                                  .filter(bootstrapSender -> type.equals(bootstrapSender.getType()))
                                                  .findFirst()
-                                                 .orElseThrow(() -> new IllegalStateException("bootstrap sender is undefined. Type = " + type));
+                                                 .orElseThrow(
+                                                         () -> new IllegalStateException("bootstrap sender is undefined. Type = " + type));
         return args -> sender.sendMessages(topic, generateMessageService.createMessage(count));
     }
 }

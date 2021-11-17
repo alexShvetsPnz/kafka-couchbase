@@ -23,5 +23,16 @@ spring:
               packages: 'com.shvets.kafkaandcouchbase.kafka.model'
 
 bootstrap:
-  count: 10000
+  count: 10
   sender-type: async
+
+
+storage:
+  host: "couchbase://127.0.0.1"
+  bucket: IOT
+  username: Administrator
+  password: 123456
+  expiry: 0
+
+logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+
