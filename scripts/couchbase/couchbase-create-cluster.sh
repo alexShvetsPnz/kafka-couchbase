@@ -69,12 +69,19 @@ docker exec db /bin/bash -c "couchbase-cli collection-manage -c $CLUSTER_ADDRESS
                                                              -p $PASSWORD --bucket IOT --create-collection infrastructure.devices"
 printf "Primary index for houses creating...\n"
 docker exec db /bin/bash -c "cbq -u $USER_NAME -p $PASSWORD -e \"$CLUSTER_ADDRESS\" \
-                                     --script=\"CREATE PRIMARY INDEX  on IOT.infrastructure.houses;\""
+                                     --script=\"CREATE PRIMARY INDEX PRIMARY_INDEX_HOUSES on IOT.infrastructure.houses;\""
+
+printf "Primary index for devices creating...\n"
+docker exec db /bin/bash -c "cbq -u $USER_NAME -p $PASSWORD -e \"$CLUSTER_ADDRESS\" \
+                                     --script=\"CREATE PRIMARY INDEX PRIMARY_INDEX_DEVICES on IOT.infrastructure.devices;\""
 
 printf "Index for devices creating...\n"
 docker exec db /bin/bash -c "cbq -u $USER_NAME -p $PASSWORD -e \"$CLUSTER_ADDRESS\" \
                                      --script=\"CREATE INDEX HOUSES_ADDRESS_TYPE ON IOT.infrastructure.devices (type, house.address) USING GSI;\""
 
+printf "Primary index for metrics creating...\n"
+docker exec db /bin/bash -c "cbq -u $USER_NAME -p $PASSWORD -e \"$CLUSTER_ADDRESS\" \
+                                     --script=\"CREATE PRIMARY INDEX PRIMARY_INDEX_METRICS on IOT.infrastructure.metrics;\""
 
 
 printf "done(couchbase)\n"

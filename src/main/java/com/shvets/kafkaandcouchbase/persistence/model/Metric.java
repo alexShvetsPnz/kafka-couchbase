@@ -36,4 +36,7 @@ public class Metric {
     @Field
     String deviceAddress;
 
+    @Field
+    Long timestamp;
+
 }

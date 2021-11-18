@@ -39,6 +39,6 @@ public class DBConfig extends AbstractCouchbaseConfiguration {
 
     @Override
     public String typeKey() {
-        return "type";
+        return "eType";
     }
 }

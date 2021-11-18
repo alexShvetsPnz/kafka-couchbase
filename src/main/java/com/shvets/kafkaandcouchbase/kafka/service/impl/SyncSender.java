@@ -9,18 +9,18 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import com.shvets.kafkaandcouchbase.kafka.model.InputKafkaMessage;
-import com.shvets.kafkaandcouchbase.kafka.service.BootstrapSender;
+import com.shvets.kafkaandcouchbase.kafka.service.Sender;
 import com.shvets.kafkaandcouchbase.kafka.service.LogBootStrapResultsService;
 
 @Service
 @Slf4j
-public class SyncBootstrapSender implements BootstrapSender {
+public class SyncSender implements Sender {
 
     private final KafkaTemplate<String, InputKafkaMessage> kafkaTemplate;
     private final LogBootStrapResultsService logBootStrapResultsService;
 
-    public SyncBootstrapSender(KafkaTemplate<String, InputKafkaMessage> kafkaTemplate,
-                               LogBootStrapResultsService logBootStrapResultsService) {
+    public SyncSender(KafkaTemplate<String, InputKafkaMessage> kafkaTemplate,
+                      LogBootStrapResultsService logBootStrapResultsService) {
         this.kafkaTemplate = kafkaTemplate;
         this.logBootStrapResultsService = logBootStrapResultsService;
     }

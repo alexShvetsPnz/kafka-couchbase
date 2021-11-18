@@ -8,12 +8,18 @@ import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Document
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
+@ToString
 public class Device {
 
     @Id
@@ -28,6 +34,7 @@ public class Device {
 
     @AllArgsConstructor
     @NoArgsConstructor
+    @Getter
     public static class ShortHouse {
         String id;
         String address;

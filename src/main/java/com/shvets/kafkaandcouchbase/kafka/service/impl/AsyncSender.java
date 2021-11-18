@@ -14,19 +14,19 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.google.common.collect.Lists;
 import com.shvets.kafkaandcouchbase.kafka.model.InputKafkaMessage;
-import com.shvets.kafkaandcouchbase.kafka.service.BootstrapSender;
+import com.shvets.kafkaandcouchbase.kafka.service.Sender;
 
 @Service
 @Slf4j
-public class AsyncBootstrapSender implements BootstrapSender {
+public class AsyncSender implements Sender {
 
     private static final int threads = 10;
     private static ExecutorService WORKER_THREAD_POOL
             = Executors.newFixedThreadPool(10);
     private static final CompletionService<Void> executor = new ExecutorCompletionService<>(WORKER_THREAD_POOL);
-    private final SyncBootstrapSender syncBootstrapSender;
+    private final SyncSender syncBootstrapSender;
 
-    public AsyncBootstrapSender(SyncBootstrapSender syncBootstrapSender) {
+    public AsyncSender(SyncSender syncBootstrapSender) {
         this.syncBootstrapSender = syncBootstrapSender;
     }
 
@@ -40,7 +40,7 @@ public class AsyncBootstrapSender implements BootstrapSender {
     public void sendMessages(String topic, List<InputKafkaMessage> messages) {
 
         long totalMessages = messages.size();
-        final int messagePerThread = (int) (totalMessages / threads);
+        final int messagePerThread = (int) (Math.max(threads, totalMessages) / threads);
         log.debug("messagePerThread:{}", messagePerThread);
         List<List<InputKafkaMessage>> partition = Lists.partition(messages, messagePerThread);
         for (List<InputKafkaMessage> inputKafkaMessages : partition) {

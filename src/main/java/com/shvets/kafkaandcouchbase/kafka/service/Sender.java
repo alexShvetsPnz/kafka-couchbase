@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.shvets.kafkaandcouchbase.kafka.model.InputKafkaMessage;
 
 @Service
-public interface BootstrapSender {
+public interface Sender {
 
     String getType();
 

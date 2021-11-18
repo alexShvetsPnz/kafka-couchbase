@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.CollectionUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,9 +22,11 @@ public class Bootstrap {
                               DeviceRepository deviceRepository) {
 
         return args -> {
-            List<House> houses = houseRepository.findAll();
-            log.info("got houses: " + houses.size());
-            if (CollectionUtils.isEmpty(houses)) {
+            long houses = houseRepository.count();
+            long devices = deviceRepository.count();
+            log.info("got houses: " + houses);
+            log.info("got devices: " + devices);
+            if (houses == 0) {
                 log.info("Starting houses generation...");
                 for (int hInd = 0; hInd < 100; hInd++) {
                     House houseSaved = houseRepository.save(House.builder()

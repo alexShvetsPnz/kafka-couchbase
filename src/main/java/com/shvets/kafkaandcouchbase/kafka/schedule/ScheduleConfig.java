@@ -1,7 +1,5 @@
 package com.shvets.kafkaandcouchbase.kafka.schedule;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -9,7 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import lombok.extern.slf4j.Slf4j;
 
-import com.shvets.kafkaandcouchbase.kafka.service.BootstrapSender;
+import com.shvets.kafkaandcouchbase.kafka.service.SenderFactory;
 import com.shvets.kafkaandcouchbase.kafka.service.impl.GenerateMessageService;
 
 @Configuration
@@ -18,22 +16,19 @@ import com.shvets.kafkaandcouchbase.kafka.service.impl.GenerateMessageService;
 public class ScheduleConfig {
 
     private final GenerateMessageService generateMessageService;
-    private final List<BootstrapSender> bootstrapSenders;
+    private final SenderFactory senderFactory;
     private final String topic;
-    private final String type;
 
     public ScheduleConfig(GenerateMessageService generateMessageService,
-                          List<BootstrapSender> bootstrapSenders,
-                          @Value("${spring.kafka.producer.topic}") String topic,
-                          @Value("${bootstrap.sender-type:sync}") String type) {
+                          SenderFactory senderFactory,
+                          @Value("${spring.kafka.producer.topic}") String topic) {
         this.generateMessageService = generateMessageService;
-        this.bootstrapSenders = bootstrapSenders;
+        this.senderFactory = senderFactory;
         this.topic = topic;
-        this.type = type;
     }
 
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 5000)
     public void scheduleFixedRateTask() {
-//        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        senderFactory.getSender().sendMessages(topic, generateMessageService.createMessage(1));
     }
 }
