@@ -2,7 +2,7 @@
 CLUSTER_ADDRESS="localhost:8091"
 USER_NAME="Administrator"
 PASSWORD="123456"
-printf 'Start containers\n'
+printf 'Start couchbase containers\n'
 docker run -d --name db1 couchbase
 docker run -d --name db2 couchbase
 docker run -d --name db -p 8091-8096:8091-8096 -p 11210-11211:11210-11211 couchbase
@@ -77,6 +77,6 @@ docker exec db /bin/bash -c "cbq -u $USER_NAME -p $PASSWORD -e \"$CLUSTER_ADDRES
 
 
 
-printf "done\n"
+printf "done(couchbase)\n"
 exit 0
 

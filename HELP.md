@@ -13,7 +13,11 @@ docker exec -it kafka bash
 
 TO create topic with 10 partitions
 
-kafka-topics --create --bootstrap-server kafka:9092 --replication-factor 1 --partitions 10 --topic topic-10p 
+kafka-topics --create --bootstrap-server kafka:9092 --replication-factor 1 --partitions 10 --topic metrics 
+
+TO describe groups (get offsets)
+
+kafka-consumer-groups --bootstrap-server kafka:9092 --all-groups --describe
 
 to run Couchbase
 docker run -d --name db1 couchbase
