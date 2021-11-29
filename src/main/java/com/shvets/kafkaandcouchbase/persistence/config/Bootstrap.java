@@ -1,17 +1,13 @@
 package com.shvets.kafkaandcouchbase.persistence.config;
 
-import java.util.List;
-
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import lombok.extern.slf4j.Slf4j;
-
 import com.shvets.kafkaandcouchbase.persistence.model.Device;
 import com.shvets.kafkaandcouchbase.persistence.model.House;
 import com.shvets.kafkaandcouchbase.persistence.repository.DeviceRepository;
 import com.shvets.kafkaandcouchbase.persistence.repository.HouseRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Slf4j

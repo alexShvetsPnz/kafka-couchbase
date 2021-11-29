@@ -10,11 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import com.shvets.kafkaandcouchbase.kafka.service.SenderFactory;
 import com.shvets.kafkaandcouchbase.kafka.service.impl.GenerateMessageService;
 
-//@Configuration
+@Configuration
 @Slf4j
 public class BootstrapConfig {
 
-//    @Bean
+    @Bean
     ApplicationRunner runAdditionalClientCacheInitialization(GenerateMessageService generateMessageService,
                                                              SenderFactory senderFactory,
                                                              @Value("${spring.kafka.producer.topic}") String topic,

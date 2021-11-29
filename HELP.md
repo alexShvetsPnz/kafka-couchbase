@@ -26,3 +26,21 @@ docker run -d --name db3 -p 8091-8096:8091-8096 -p 11210-11211:11210-11211 couch
 
 docker inspect --format '{{ .NetworkSettings.IPAddress }}' db1
 docker inspect --format '{{ .NetworkSettings.IPAddress }}' db2
+
+
+to Run on Mac need install couchbase sever
+https://docs.couchbase.com/server/current/install/macos-install.html
+
+============================================================
+to Remove cluster on Mac
+https://docs.couchbase.com/server/current/install/install-uninstalling.html
+1. Quit Couchbase Server if it’s running.
+Click Couchbase Server menu bar icon and select Quit Couchbase Server. The menu bar icon will disappear when Couchbase Server shuts down.
+
+2. Remove the application.
+Go to the Applications folder and drag Couchbase Server.app to the Trash.
+
+3. Remove the data and log directories.
+Open Finder and go to ~/Library/Application Support/, and drag both the Couchbase and Membase folders (if present) to the Trash.
+
+Next, go to ~/Library/Python/, and drag the couchbase-py folder to the Trash.
